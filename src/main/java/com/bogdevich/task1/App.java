@@ -1,5 +1,10 @@
 package com.bogdevich.task1;
 
+import com.bogdevich.task1.entity.Point;
+import com.bogdevich.task1.util.Exception.PointReaderException;
+import com.bogdevich.task1.util.PointReader;
+import sun.security.pkcs.ParsingException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,9 +18,17 @@ public class App
 
     public static void main( String[] args )
     {
-        Pattern pattern = Pattern.compile(STRING_PATTERN);
-        Matcher matcher = pattern.matcher("");
-        boolean isEquals = matcher.matches();
-        System.out.println(isEquals);
+        //Point  point = PointReader.extractPointParams("src/main/resources/input.txt",1);
+        //Point point = new Point();
+        try{
+            for (Point point:
+                    PointReader.extractPointParams("src/main/resources/input.txt",29)) {
+                System.out.println(point.toString());
+            }
+        }catch(PointReaderException ex){
+            System.out.println(point.toString());
+            System.out.println(ex.getMessage()+ex.getCause().getMessage());
+
+        }
     }
 }
