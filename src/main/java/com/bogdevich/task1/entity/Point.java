@@ -4,37 +4,37 @@ package com.bogdevich.task1.entity;
  * Created by Adrienne on 21.03.17.
  */
 public class Point {
-    private double x;
-    private double y;
-    private double z;
+    private int x;
+    private int y;
+    private int z;
 
-    public Point(double x, double y, double z) {
+    public Point(int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
 
-    public double getX() {
+    public int getX() {
         return x;
     }
 
-    public void setX(double x) {
+    public void setX(int x) {
         this.x = x;
     }
 
-    public double getY() {
+    public int getY() {
         return y;
     }
 
-    public void setY(double y) {
+    public void setY(int y) {
         this.y = y;
     }
 
-    public double getZ() {
+    public int getZ() {
         return z;
     }
 
-    public void setZ(double z) {
+    public void setZ(int z) {
         this.z = z;
     }
 
@@ -45,22 +45,17 @@ public class Point {
 
         Point point = (Point) o;
 
-        if (Double.compare(point.getX(), getX()) != 0) return false;
-        if (Double.compare(point.getY(), getY()) != 0) return false;
-        return Double.compare(point.getZ(), getZ()) == 0;
+        if (getX() != point.getX()) return false;
+        if (getY() != point.getY()) return false;
+        return getZ() == point.getZ();
 
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        temp = Double.doubleToLongBits(getX());
-        result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getY());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(getZ());
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = getX();
+        result = 31 * result + getY();
+        result = 31 * result + getZ();
         return result;
     }
 

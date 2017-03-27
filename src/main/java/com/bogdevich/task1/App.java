@@ -1,6 +1,7 @@
 package com.bogdevich.task1;
 
 import com.bogdevich.task1.entity.Point;
+import com.bogdevich.task1.service.Validator;
 import com.bogdevich.task1.util.Exception.PointReaderException;
 import com.bogdevich.task1.util.PointReader;
 import sun.security.pkcs.ParsingException;
@@ -21,14 +22,11 @@ public class App
         //Point  point = PointReader.extractPointParams("src/main/resources/input.txt",1);
         //Point point = new Point();
         try{
-            for (Point point:
-                    PointReader.extractPointParams("src/main/resources/input.txt",29)) {
-                System.out.println(point.toString());
-            }
+            Validator validator = new Validator(PointReader.extractPointParams("src/main/resources/input.txt",3));
+            System.out.println(validator.isOrthogonal());
         }catch(PointReaderException ex){
-            System.out.println(point.toString());
             System.out.println(ex.getMessage()+ex.getCause().getMessage());
-
         }
+
     }
 }
