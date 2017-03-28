@@ -1,9 +1,14 @@
 package com.bogdevich.task1.entity;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Created by Adrienne on 21.03.17.
  */
 public class Point {
+    private final static Logger LOGGER = LogManager.getLogger();
+
     private int x;
     private int y;
     private int z;
@@ -12,6 +17,7 @@ public class Point {
         this.x = x;
         this.y = y;
         this.z = z;
+        LOGGER.info("New point "+this.toString());
     }
 
     public int getX() {

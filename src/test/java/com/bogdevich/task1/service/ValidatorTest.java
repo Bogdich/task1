@@ -1,4 +1,4 @@
-package com.bogdevich.task1.util;
+package com.bogdevich.task1.service;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Adrienne on 28.03.17.
  */
-public class PointReaderTest {
+public class ValidatorTest {
     @Before
     public void setUp() throws Exception {
 
@@ -21,7 +21,12 @@ public class PointReaderTest {
     }
 
     @Test
-    public void extractPointParams() throws Exception {
+    public void isPlane() throws Exception {
+
+    }
+
+    @Test
+    public void isOrthogonal() throws Exception {
 
     }
 

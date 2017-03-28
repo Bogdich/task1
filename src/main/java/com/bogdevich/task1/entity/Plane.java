@@ -1,17 +1,31 @@
 package com.bogdevich.task1.entity;
 
+import com.bogdevich.task1.observer.Observer;
+import com.bogdevich.task1.observer.PlaneObserver;
+import com.bogdevich.task1.observer.Subject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * Created by Adrienne on 21.03.17.
  */
-public class Plane {
+public class Plane implements Subject<PlaneObserver>{
+    private final static Logger LOGGER = LogManager.getLogger();
+
     private Point a;
     private Point b;
     private Point c;
+
+    private PlaneObserver observer;
 
     public Plane(Point a, Point b, Point c) {
         this.a = a;
         this.b = b;
         this.c = c;
+        LOGGER.info("New "+this.toString());
+    }
+
+    public Plane() {
     }
 
     public Point getA() {
@@ -36,6 +50,25 @@ public class Plane {
 
     public void setC(Point c) {
         this.c = c;
+    }
+
+    @Override
+    public void add(PlaneObserver observer) {
+        this.observer = observer;
+        observer.addObservable(this);
+    }
+
+    @Override
+    public void remove(PlaneObserver observer) {
+        observer.removeObservable(this);
+        observer = null;
+    }
+
+    @Override
+    public void notifyObservers() {
+        if (observer != null) {
+            observer.update(this);
+        }
     }
 
     @Override
