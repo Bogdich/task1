@@ -28,7 +28,7 @@ public class App
     {
         Plane plane = PlaneCreator.create("src/resources/input.txt");
         Corner corner = new Corner(plane);
-        System.out.println("haha");
+        plane.setC(new Point(0,0,2));
 
     }
 }

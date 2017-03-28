@@ -1,16 +1,18 @@
 package com.bogdevich.task1.service;
 
 import com.bogdevich.task1.entity.Plane;
+import com.bogdevich.task1.observer.Observer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Arrays;
 
 /**
  * Created by Adrienne on 27.03.17.
  */
-public class Corner {
+public class Corner implements Observer {
+
     private final static Logger LOGGER = LogManager.getLogger();
+
     private final static int[] XY = {0,0,1};
     private final static int[] YZ = {1,0,0};
     private final static int[] ZY = {0,1,0};
@@ -19,9 +21,6 @@ public class Corner {
     private double cornerYZ;
     private double cornerZY;
     private Plane plane;
-    private int[] vector1;
-    private int[] vector2;
-
 
     public double getCornerXY() {
         return cornerXY;
@@ -41,6 +40,7 @@ public class Corner {
 
     public Corner(Plane plane) {
         this.plane = plane;
+        plane.add(this);
         calculateCorners();
     }
 
@@ -50,9 +50,7 @@ public class Corner {
         cornerXY = calculateCorner(plane, XY);
         cornerYZ = calculateCorner(plane, YZ);
         cornerZY = calculateCorner(plane, ZY);
-        LOGGER.debug("Corner with XY plane " + cornerXY + " deg");
-        LOGGER.debug("Corner with YZ plane " + cornerYZ + " deg");
-        LOGGER.debug("Corner with ZY plane " + cornerZY + " deg");
+        LOGGER.info(this.toString());
     }
     private int[] getPlainParameters(){
         int[] vector1 = new int[]{
@@ -72,7 +70,7 @@ public class Corner {
         int A = vector1[1]* vector2[2]- vector1[2]* vector2[1];
         int B = vector1[0]* vector2[2]- vector1[2]* vector2[0];
         int C = vector1[0]* vector2[1]- vector1[1]* vector2[0];
-        LOGGER.debug("Plain parameters: "+A+" "+B+" "+C);
+        LOGGER.debug("Plane parameters: "+A+" "+B+" "+C);
         return new int[]{A,B,C};
     }
     private double calculateCorner(int[] plane1, int[] plane2){
@@ -84,10 +82,18 @@ public class Corner {
     }
 
     @Override
+    public void update(Plane plane) {
+        LOGGER.info(this.plane.toString()+" was update to "+plane.toString());
+        this.plane = plane;
+        calculateCorners();
+    }
+
+    @Override
     public String toString() {
         return "Corner{" +
-                "vector1=" + Arrays.toString(vector1) +
-                ", vector2=" + Arrays.toString(vector2) +
+                "cornerXY=" + cornerXY + "deg" +
+                ", cornerYZ=" + cornerYZ + "deg" +
+                ", cornerZY=" + cornerZY + "deg" +
                 '}';
     }
 }
