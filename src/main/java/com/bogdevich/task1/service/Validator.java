@@ -44,9 +44,9 @@ public class Validator {
     public boolean isOrthogonal(){
         if(isPlane()){
             return
-                    points[0].getX()==points[1].getX() && points[1].getX()==points[2].getX() ||
-                    points[0].getY()==points[1].getY() && points[1].getY()==points[2].getY() ||
-                    points[0].getZ()==points[1].getZ() && points[1].getZ()==points[2].getZ()
+                    points[0].getX()==points[1].getX() && points[0].getX()!=0 || points[1].getX()==points[2].getX() && points[1].getX()!=0 ||
+                    points[0].getY()==points[1].getY() && points[0].getY()!=0 || points[1].getY()==points[2].getY() && points[1].getY()!=0 ||
+                    points[0].getZ()==points[1].getZ() && points[0].getZ()!=0 || points[1].getZ()==points[2].getZ() && points[1].getZ()!=0
                     ;
         }
         else{

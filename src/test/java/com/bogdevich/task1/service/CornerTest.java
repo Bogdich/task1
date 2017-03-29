@@ -6,6 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import static org.hamcrest.Matchers.*;
 
 import java.util.*;
 
@@ -20,15 +21,10 @@ public class CornerTest {
     private static Corner corner;
     private ArrayList<Point> points;
     private ArrayList<Integer> expected;
-    //private ArrayList<ArrayList<Integer>> val;
-    //private HashMap<Integer,Point[]> values;
+
     @Parameterized.Parameters
     public static Collection<Object[]> set_of_parameters()
     {
-        // Теперь здесь можно использовать отдельные
-        // элементы ArrayList как ожидаемое значение и входные данные.
-        // В этом примере: первое число = результат сложения,
-        // а второе и третье число -- слагаемые.
         return Arrays.asList( new Object[][] {
                 { new ArrayList<Integer>(Arrays.asList(54,54,54)),new ArrayList<Point>(Arrays.asList(new Point(1,0,0), new Point(0,1,0), new Point(0,0,1)))} ,
                 { new ArrayList<Integer>(Arrays.asList(90,45,45)),new ArrayList<Point>(Arrays.asList(new Point(1,0,0), new Point(0,1,0), new Point(0,1,1)))} ,
@@ -46,17 +42,16 @@ public class CornerTest {
 
     @Test
     public void getCornerXY() throws Exception {
-        assertEquals(expected.get(0),corner.getCornerXY(),1);
+        assertThat(corner.getCornerXY(),is(closeTo(expected.get(0),1)));
     }
 
     @Test
     public void getCornerYZ() throws Exception {
-        assertEquals(expected.get(1),corner.getCornerYZ(),1);
+        assertThat(corner.getCornerXY(),is(closeTo(expected.get(0),1)));
     }
 
     @Test
     public void getCornerZY() throws Exception {
-        assertEquals(expected.get(2),corner.getCornerZY(),1);
+        assertThat(corner.getCornerXY(),is(closeTo(expected.get(0),1)));
     }
-
 }

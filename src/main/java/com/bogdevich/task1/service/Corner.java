@@ -38,6 +38,7 @@ public class Corner implements Observer {
         return plane;
     }
 
+
     public Corner(Plane plane) {
         this.plane = plane;
         plane.add(this);
